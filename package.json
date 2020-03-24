@@ -1,0 +1,21 @@
+{
+  "name": "Lottery",
+  "version": "1.0.0",
+  "description": "A solidity code to implement lottery draw system",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "lottery"
+  ],
+  "author": "atm1504",
+  "license": "ISC",
+  "dependencies": {
+    "ganache-cli": "^6.9.0",
+    "mocha": "^7.0.1",
+    "solc": "^0.4.17",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "^1.0.0-beta.26"
+  }
+}
