@@ -11,17 +11,17 @@ beforeEach(async () => {
     accounts = await web3.eth.getAccounts();
 
     // Deploying the smart contract
-    // lottery = await new web3.eth.Contract(JSON.parse(interface))
-    //     .deploy({ data: bytecode, arguments: ["Hi deploying"] })
-    //     .send({ from: accounts[0], gas: "1000000" });
+    lottery = await new web3.eth.Contract(JSON.parse(interface))
+        .deploy({ data: bytecode })
+        .send({ from: accounts[0], gas: "1000000" });
 });
 
-describe("Lottery", () => {
-    // it("it deploys the contract", () => {
-    //     // console.log(accounts);
-    //     // console.log(lottery); 
-    //     assert.ok(lottery.options.address)
-    // });
+describe("Lottery Contract", () => {
+    it("it deploys the contract", () => {
+        // console.log(accounts);
+        // console.log(lottery); 
+        assert.ok(lottery.options.address)
+    });
 
     // it("it has default message", async () => {
     //     const message = await lottery.methods.message().call();
