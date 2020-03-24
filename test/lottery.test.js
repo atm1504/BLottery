@@ -18,22 +18,41 @@ beforeEach(async () => {
 
 describe("Lottery Contract", () => {
     it("it deploys the contract", () => {
-        // console.log(accounts);
-        // console.log(lottery); 
         assert.ok(lottery.options.address)
     });
 
-    // it("it has default message", async () => {
-    //     const message = await lottery.methods.message().call();
-    //     assert.equal(message, "Hi deploying");
-    //     // console.log(accounts);
-    //     // console.log(lottery); 
-    // });
+    it("it allows one accout to ether", async () => {
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei("0.021", "ether")
+        });
+        const players = await lottery.methods.getPlayers().call({
+            from: accounts[0]
+        });
+        assert.equal(accounts[0], players[0]);
+        assert.equal(1, players.length);
+    });
 
-    // it("can change the message", async () => {
-    //     await lottery.methods.setMessage("Bye").send({ from: accounts[0] });
-    //     const message = await lottery.methods.message().call();
-    //     assert.equal(message, "Bye");
-    // });
+    it("it allows multiple accout to ether", async () => {
+        await lottery.methods.enter().send({
+            from: accounts[2],
+            value: web3.utils.toWei("0.021", "ether")
+        });
+        await lottery.methods.enter().send({
+            from: accounts[1],
+            value: web3.utils.toWei("0.021", "ether")
+        });
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei("0.021", "ether")
+        });
+        const players = await lottery.methods.getPlayers().call({
+            from: accounts[0]
+        });
+        assert.equal(accounts[0], players[2]);
+        assert.equal(accounts[1], players[1]);
+        assert.equal(accounts[2], players[0]);
+        assert.equal(3, players.length);
+    });
 
 });
